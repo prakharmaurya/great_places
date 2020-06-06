@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import './screens/places_list_screen.dart';
+import './screens/place_details_screen.dart';
+import './screens/add_place_screen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +18,11 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Text('Flutter Demo Home Page'),
+      home: PlacesListScreen(),
+      routes: {
+        PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
+        AddPlaceScreen.routeName: (context) => AddPlaceScreen(),
+      },
     );
   }
 }
