@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './add_place_screen.dart';
+import '../provider/places_provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
   @override
@@ -17,8 +19,26 @@ class PlacesListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: CircularProgressIndicator(),
+      body: Consumer<PlacesProvider>(
+        child: Center(
+          child: Text('Got no places yet!!!'),
+        ),
+        builder: (ctx, places, ch) => places.items.length <= 0
+            ? ch
+            : ListView.builder(
+                itemBuilder: (c, i) => ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: FileImage(
+                      places.items[i].image,
+                    ),
+                  ),
+                  title: Text(
+                    places.items[i].title,
+                  ),
+                  onTap: () {},
+                ),
+                itemCount: places.items.length,
+              ),
       ),
     );
   }
