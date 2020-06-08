@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import './provider/places_provider.dart';
 import './screens/places_list_screen.dart';
 import './screens/place_details_screen.dart';
 import './screens/add_place_screen.dart';
@@ -11,18 +13,21 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Great Places',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        accentColor: Colors.amber,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return ChangeNotifierProvider(
+      create: (context) => PlacesProvider(),
+      child: MaterialApp(
+        title: 'Great Places',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          accentColor: Colors.amber,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: PlacesListScreen(),
+        routes: {
+          PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
+          AddPlaceScreen.routeName: (context) => AddPlaceScreen(),
+        },
       ),
-      home: PlacesListScreen(),
-      routes: {
-        PlaceDetailsScreen.routeName: (context) => PlaceDetailsScreen(),
-        AddPlaceScreen.routeName: (context) => AddPlaceScreen(),
-      },
     );
   }
 }
